@@ -3,7 +3,7 @@
 		ref="header"
 		class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out"
 		:class="[
-			// Style dynamique au scroll : combine Tailwind et l'état Vue
+			// Style dynamique au scroll
 			scrolled
 				? 'bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl shadow-md border-b border-gray-200/50 dark:border-gray-700/50'
 				: 'bg-transparent dark:bg-transparent',
@@ -11,15 +11,22 @@
 		<div class="container mx-auto px-4 sm:px-6 lg:px-8">
 			<div class="flex justify-between items-center py-4 md:py-6">
 				<!-- Logo et Nom du site -->
-				<NuxtLink to="/" class="group flex items-center gap-3">
-					<!-- UAvatar (Nuxt UI) avec des classes de survol (Tailwind) -->
+				<NuxtLink
+					to="/"
+					class="flex items-center gap-3"
+					@mouseenter="logoHovered = true"
+					@mouseleave="logoHovered = false">
+					<!-- UAvatar avec animation contrôlée par Vue -->
 					<UAvatar
 						icon="i-heroicons-rocket-launch"
 						size="md"
 						color="primary"
 						variant="solid"
-						class="transition-transform duration-300 group-hover:scale-110 group-hover:rotate-12" />
-					<!-- Titre avec un gradient animé (Custom CSS) -->
+						:class="[
+							'transition-transform duration-300',
+							logoHovered ? 'scale-110 rotate-12' : '',
+						]" />
+					<!-- Titre avec un gradient animé -->
 					<span
 						class="font-bold text-xl md:text-2xl bg-gradient-to-r from-primary-600 to-primary-400 bg-clip-text text-transparent">
 						Mon Portfolio
@@ -29,21 +36,29 @@
 				<!-- Navigation principale (Desktop) -->
 				<nav class="hidden lg:flex items-center space-x-1">
 					<NuxtLink
-						v-for="item in navItems"
+						v-for="(item, index) in navItems"
 						:key="item.label"
 						:to="item.to"
-						class="relative px-4 py-2 font-medium transition-all duration-200 group"
+						class="relative px-4 py-2 font-medium transition-all duration-200"
 						:class="[
-							// Combinaison de classes conditionnelles et de préfixes 'dark:'
+							// Style basé sur l'état actif
 							route.path === item.to
 								? 'text-primary-600 dark:text-primary-400'
-								: 'text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400',
-						]">
+								: 'text-gray-700 dark:text-gray-300',
+						]"
+						@mouseenter="activeNavItem = index"
+						@mouseleave="activeNavItem = null">
 						{{ item.label }}
-						<!-- Ligne animée sous le lien (Custom CSS + Tailwind) -->
+						<!-- Ligne animée sous le lien -->
 						<span
-							class="absolute bottom-0 left-1/2 w-0 h-0.5 bg-gradient-to-r from-primary-500 to-primary-400 transform -translate-x-1/2 group-hover:w-full transition-all duration-300 ease-out"
-							:class="{ 'w-full': route.path === item.to }">
+							class="absolute bottom-0 left-1/2 h-0.5 bg-gradient-to-r from-primary-500 to-primary-400 transform -translate-x-1/2 transition-all duration-300 ease-out"
+							:class="[
+								route.path === item.to
+									? 'w-full'
+									: activeNavItem === index
+										? 'w-full'
+										: 'w-0',
+							]">
 						</span>
 					</NuxtLink>
 				</nav>
@@ -53,7 +68,7 @@
 					<!-- Liens sociaux (Desktop) -->
 					<div class="hidden md:flex items-center gap-1">
 						<UButton
-							v-for="link in socialLinks"
+							v-for="(link, index) in socialLinks"
 							:key="link.label"
 							:to="link.to"
 							:icon="link.icon"
@@ -62,14 +77,20 @@
 							variant="ghost"
 							color="gray"
 							size="sm"
-							class="transition-all duration-200 hover:scale-110 hover:text-gray-900 dark:hover:text-white" />
+							:class="[
+								'transition-all duration-200',
+								hoveredSocialLink === index
+									? 'scale-110 text-gray-900 dark:text-white'
+									: '',
+							]"
+							@mouseenter="hoveredSocialLink = index"
+							@mouseleave="hoveredSocialLink = null" />
 					</div>
 
-					<!-- Bouton de changement de thème (Nuxt UI) -->
-					<!-- Il est stylé par Nuxt UI mais on peut ajuster sa visibilité avec Tailwind -->
+					<!-- Bouton de changement de thème -->
 					<ThemeToggle />
 
-					<!-- Bouton CTA principal (Nuxt UI + Tailwind) -->
+					<!-- Bouton CTA principal -->
 					<UButton
 						label="Me contacter"
 						to="/contact"
@@ -78,7 +99,7 @@
 						size="sm"
 						class="hidden sm:flex transition-all duration-300 hover:shadow-lg hover:shadow-primary-500/25 hover:-translate-y-0.5" />
 
-					<!-- Menu mobile (Nuxt UI) -->
+					<!-- Menu mobile -->
 					<UButton
 						icon="i-heroicons-bars-3"
 						variant="ghost"
@@ -153,11 +174,15 @@
 </template>
 
 <script setup lang="ts">
-// ... (Le script reste identique à la version précédente)
 const route = useRoute();
 const showMobileMenu = ref(false);
 const header = ref<HTMLElement | null>(null);
 const scrolled = ref(false);
+
+// États pour remplacer les fonctionnalités de 'group'
+const logoHovered = ref(false);
+const activeNavItem = ref<number | null>(null);
+const hoveredSocialLink = ref<number | null>(null);
 
 const handleScroll = () => {
 	scrolled.value = window.scrollY > 20;
@@ -193,7 +218,7 @@ watch(
 
 const navItems = [
 	{ label: "Accueil", to: "/" },
-	{ label: "Projets", to: "/projects" },
+	{ label: "Projets", to: "/projects/projects" },
 	{ label: "À propos", to: "/about" },
 ];
 
