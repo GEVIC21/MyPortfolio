@@ -45,8 +45,8 @@
 					icon="i-simple-icons-x"
 					aria-label="Lien vers mon profil X (Twitter)" />
 
-				<!-- Un séparateur visuel élégant -->
-				<UDivider orientation="vertical" class="h-6" />
+				<!-- Si vous utilisiez <UDivider />, remplacez-le par : -->
+				<div class="border-t border-gray-200 dark:border-gray-800 my-4"></div>
 
 				<!-- Bouton pour remonter en haut de la page -->
 				<UButton

@@ -1,9 +1,9 @@
+<!-- app/components/AppHeader.vue -->
 <template>
 	<header
 		ref="header"
 		class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out"
 		:class="[
-			// Style dynamique au scroll
 			scrolled
 				? 'bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl shadow-md border-b border-gray-200/50 dark:border-gray-700/50'
 				: 'bg-transparent dark:bg-transparent',
@@ -16,7 +16,6 @@
 					class="flex items-center gap-3"
 					@mouseenter="logoHovered = true"
 					@mouseleave="logoHovered = false">
-					<!-- UAvatar avec animation contrôlée par Vue -->
 					<UAvatar
 						icon="i-heroicons-rocket-launch"
 						size="md"
@@ -26,7 +25,6 @@
 							'transition-transform duration-300',
 							logoHovered ? 'scale-110 rotate-12' : '',
 						]" />
-					<!-- Titre avec un gradient animé -->
 					<span
 						class="font-bold text-xl md:text-2xl bg-gradient-to-r from-primary-600 to-primary-400 bg-clip-text text-transparent">
 						Mon Portfolio
@@ -37,19 +35,17 @@
 				<nav class="hidden lg:flex items-center space-x-1">
 					<NuxtLink
 						v-for="(item, index) in navItems"
-						:key="item.label"
+						:key="item.to"
 						:to="item.to"
 						class="relative px-4 py-2 font-medium transition-all duration-200"
 						:class="[
-							// Style basé sur l'état actif
 							route.path === item.to
 								? 'text-primary-600 dark:text-primary-400'
 								: 'text-gray-700 dark:text-gray-300',
 						]"
 						@mouseenter="activeNavItem = index"
 						@mouseleave="activeNavItem = null">
-						{{ item.label }}
-						<!-- Ligne animée sous le lien -->
+						{{ $t(item.label) }}
 						<span
 							class="absolute bottom-0 left-1/2 h-0.5 bg-gradient-to-r from-primary-500 to-primary-400 transform -translate-x-1/2 transition-all duration-300 ease-out"
 							:class="[
@@ -87,12 +83,15 @@
 							@mouseleave="hoveredSocialLink = null" />
 					</div>
 
+					<!-- Utilisation du composant LangSwitcher pour desktop -->
+					<LangSwitcher size="sm" variant="ghost" />
+
 					<!-- Bouton de changement de thème -->
 					<ThemeToggle />
 
 					<!-- Bouton CTA principal -->
 					<UButton
-						label="Me contacter"
+						:label="$t('contact')"
 						to="/contact"
 						variant="solid"
 						color="primary"
@@ -114,7 +113,6 @@
 			</div>
 		</div>
 
-		<!-- Menu mobile (avec animation de transition) -->
 		<Transition
 			enter-active-class="transition duration-300 ease-out"
 			enter-from-class="transform -translate-y-2 opacity-0"
@@ -128,7 +126,7 @@
 				<div class="container mx-auto px-4 py-4 space-y-2">
 					<NuxtLink
 						v-for="item in navItems"
-						:key="item.label"
+						:key="item.to"
 						:to="item.to"
 						class="flex items-center justify-between py-3 px-4 rounded-lg font-medium transition-all duration-200"
 						:class="[
@@ -137,7 +135,7 @@
 								: 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800',
 						]"
 						@click="showMobileMenu = false">
-						<span>{{ item.label }}</span>
+						<span>{{ $t(item.label) }}</span>
 						<UIcon name="i-heroicons-arrow-right" class="w-4 h-4" />
 					</NuxtLink>
 
@@ -157,9 +155,12 @@
 					</div>
 
 					<div class="pt-2">
+						<LangSwitcher size="md" variant="outline" class="w-full" />
+					</div>
+
+					<div class="pt-2">
 						<UButton
-							label="Me contacter"
-							to="/contact"
+							:label="$t('contact')"
 							variant="solid"
 							color="primary"
 							size="md"
@@ -216,10 +217,11 @@ watch(
 	}
 );
 
+// CORRECTION ICI : Utiliser les clés "plates"
 const navItems = [
-	{ label: "Accueil", to: "/" },
-	{ label: "Projets", to: "/projects/projects" },
-	{ label: "À propos", to: "/about" },
+	{ label: "home", to: "/" },
+	{ label: "projects", to: "/projects" },
+	{ label: "about", to: "/about" },
 ];
 
 const socialLinks = [
