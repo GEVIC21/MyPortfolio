@@ -1,20 +1,7 @@
 <template>
 	<div>
 		<!-- Hero Section -->
-		<section id="accueil" class="min-h-screen flex items-center justify-center">
-			<UPageHero
-				title="Bonjour, je suis [Votre Nom]"
-				description="Développeur Web passionné par la création d'applications modernes, performantes et élégantes."
-				:links="[
-					{
-						label: 'Voir mes projets',
-						to: '#projets',
-						color: 'primary',
-						size: 'xl',
-						trailingIcon: 'i-heroicons-arrow-right-20-solid',
-					},
-				]" />
-		</section>
+		<HeroSection />
 
 		<!-- Featured Projects Section -->
 		<section id="projets" class="py-20 bg-gray-50 dark:bg-gray-900">
