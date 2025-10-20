@@ -59,6 +59,9 @@
 </template>
 
 <script setup lang="ts">
+import { gsap } from "gsap";
+import { onMounted, reactive, ref } from "vue";
+
 const state = reactive({
 	name: "",
 	email: "",
