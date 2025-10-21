@@ -139,14 +139,8 @@ const geometricShapes = Array.from({ length: 12 }, (_, i) => ({
 	type: i % 3 === 0 ? "rounded-full" : i % 3 === 1 ? "rounded-lg" : "",
 }));
 
-// Données pour les lignes connectrices avec couleurs adaptatives
-const connectionLines = Array.from({ length: 8 }, () => ({
-	x1: Math.random() * window.innerWidth,
-	y1: Math.random() * window.innerHeight,
-	x2: Math.random() * window.innerWidth,
-	y2: Math.random() * window.innerHeight,
-	color: `hsl(${Math.random() * 60 + 160}, 70%, 50%)`, // Ajusté pour les tons émeraude
-}));
+// Données pour les lignes connectrices - initialisées comme tableau vide
+const connectionLines = ref([]);
 
 // Variables pour les particules sur canvas
 let particles = [];
@@ -161,10 +155,13 @@ let mouseMoveHandler = null;
 
 // Détecter le mode sombre
 function detectDarkMode() {
-	isDarkMode =
-		document.documentElement.classList.contains("dark") ||
-		window.matchMedia("(prefers-color-scheme: dark)").matches;
-	updateParticleColors();
+	// Vérification que nous sommes côté client
+	if (typeof window !== "undefined") {
+		isDarkMode =
+			document.documentElement.classList.contains("dark") ||
+			window.matchMedia("(prefers-color-scheme: dark)").matches;
+		updateParticleColors();
+	}
 }
 
 // Mettre à jour les couleurs des particules selon le mode
@@ -240,6 +237,9 @@ function rotateTexts() {
 
 // Initialisation des particules sur canvas avec adaptation au mode
 function initParticles() {
+	// Vérification que nous sommes côté client
+	if (typeof window === "undefined") return () => {};
+
 	const canvas = particleCanvas.value;
 	const ctx = canvas.getContext("2d");
 
@@ -343,6 +343,18 @@ function initParticles() {
 }
 
 onMounted(() => {
+	// Vérification que nous sommes côté client
+	if (typeof window === "undefined") return;
+
+	// Initialiser les lignes connectrices maintenant que window est disponible
+	connectionLines.value = Array.from({ length: 8 }, () => ({
+		x1: Math.random() * window.innerWidth,
+		y1: Math.random() * window.innerHeight,
+		x2: Math.random() * window.innerWidth,
+		y2: Math.random() * window.innerHeight,
+		color: `hsl(${Math.random() * 60 + 160}, 70%, 50%)`, // Ajusté pour les tons émeraude
+	}));
+
 	// Détecter le mode initial
 	detectDarkMode();
 

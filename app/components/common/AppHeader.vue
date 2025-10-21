@@ -24,7 +24,7 @@
 					@mouseleave="logoHovered = false">
 					<!-- Augmentation de la taille de l'avatar à "3xl" -->
 					<UAvatar
-						src="/Profile1.png"
+						src="/Profile3.png"
 						alt="Photo de profil de NDILBE DOUVIC TOYOUM"
 						size="3xl"
 						:ui="{ background: 'bg-stone-100' }"
