@@ -2,9 +2,9 @@
 export default defineNuxtConfig({
 	compatibilityDate: "2025-07-15",
 	devtools: { enabled: true },
+
 	modules: [
 		"@nuxt/ui",
-		"@nuxt/content",
 		"@nuxt/image",
 		"@nuxtjs/seo",
 		"@nuxt/icon",
@@ -13,6 +13,25 @@ export default defineNuxtConfig({
 	],
 
 	css: ["~/assets/css/main.css"],
+
+	// Configuration pour optimiser les bundles et éviter les conflits
+	optimizeDeps: {
+		exclude: ["@tsparticles/engine"],
+	},
+
+	// Configuration pour les composants qui ne fonctionnent qu'en client-side
+	ssr: true,
+
+	// Configuration de Vite pour gérer correctement les modules
+	vite: {
+		optimizeDeps: {
+			exclude: ["@tsparticles/engine"],
+		},
+		define: {
+			__VUE_OPTIONS_API__: true,
+		},
+	},
+
 	i18n: {
 		locales: [
 			{ code: "en", language: "en-US", name: "English", file: "en.json" },
@@ -63,4 +82,12 @@ export default defineNuxtConfig({
 		fallbackValue: "light",
 		dataValue: "theme",
 	},
+
+	// Configuration pour les composants auto-importés
+	components: [
+		{
+			path: "~/components",
+			pathPrefix: false,
+		},
+	],
 });

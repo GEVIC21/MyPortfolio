@@ -1,43 +1,26 @@
 <template>
 	<section
 		ref="heroSection"
-		class="relative min-h-screen flex items-center justify-center overflow-hidden">
-		<!-- Canvas pour les particules interactives -->
-		<canvas ref="particleCanvas" class="absolute inset-0 z-0"></canvas>
-
-		<!-- Éléments géométriques animés -->
-		<div class="absolute inset-0 overflow-hidden">
-			<!-- Formes géométriques flottantes -->
-			<div
-				v-for="(shape, index) in geometricShapes"
-				:key="`shape-${index}`"
-				:ref="(el) => (shapeElements[index] = el)"
-				class="absolute"
-				:style="`left: ${shape.left}%; top: ${shape.top}%;`">
-				<div
-					class="border-2"
-					:style="`width: ${shape.size}px; height: ${shape.size}px; border-color: ${shape.color}; transform: rotate(${shape.rotation}deg);`"
-					:class="shape.type"></div>
-			</div>
-
-			<!-- Lignes connectrices animées -->
-			<svg class="absolute inset-0 w-full h-full">
-				<line
-					v-for="(line, index) in connectionLines"
-					:key="`line-${index}`"
-					:ref="(el) => (lineElements[index] = el)"
-					:x1="line.x1"
-					:y1="line.y1"
-					:x2="line.x2"
-					:y2="line.y2"
-					:stroke="line.color"
-					stroke-width="1"
-					opacity="0.3" />
-			</svg>
+		class="relative min-h-screen flex items-center justify-center w-full">
+		<!-- 
+            Le conteneur des particules. 
+            'absolute inset-0' le positionne pour couvrir toute la section.
+            'overflow-hidden' est CRUCIAL pour s'assurer que rien ne dépasse.
+        -->
+		<div class="absolute inset-0 z-0 overflow-hidden">
+			<!-- 
+                Particules tsParticles.
+                NOTE : L'ID est maintenant unique pour éviter les conflits.
+            -->
+			<vue-particles
+				id="tsparticles-hero"
+				class="w-full h-full"
+				:options="particleOptions"
+				@particles-loaded="particlesLoaded" />
 		</div>
 
-		<!-- Contenu du hero avec adaptation dark/light mode -->
-		<div class="relative z-10 text-center px-6 max-w-4xl mx-auto">
+		<!-- Contenu du hero -->
+		<div class="relative z-10 text-center w-full px-4 sm:px-6 lg:px-8">
 			<div ref="titleElement" class="mb-6">
 				<h1 class="text-5xl md:text-7xl font-bold mb-4">
 					<span
@@ -59,7 +42,7 @@
 				</p>
 			</div>
 
-			<!-- Textes captivants avec effet de typing adaptatif -->
+			<!-- Textes captivants avec effet de typing -->
 			<div ref="typingElement" class="mb-8 h-20">
 				<p
 					class="text-xl md:text-2xl text-emerald-800 dark:text-emerald-300/90 font-medium drop-shadow-[0_1px_8px_rgba(5,150,105,0.4)] dark:drop-shadow-[0_0_8px_rgba(52,211,153,0.7)]">
@@ -83,7 +66,7 @@
 			</div>
 		</div>
 
-		<!-- Indicateur de défilement avec effet de pulsation adaptatif -->
+		<!-- Indicateur de défilement -->
 		<div
 			ref="scrollIndicator"
 			class="absolute bottom-8 left-1/2 transform -translate-x-1/2">
@@ -107,7 +90,6 @@ import { onMounted, onUnmounted, ref } from "vue";
 
 // Références aux éléments DOM
 const heroSection = ref(null);
-const particleCanvas = ref(null);
 const titleElement = ref(null);
 const subtitleElement = ref(null);
 const typingElement = ref(null);
@@ -115,8 +97,6 @@ const typingText = ref(null);
 const typingCursor = ref(null);
 const buttonElement = ref(null);
 const scrollIndicator = ref(null);
-const shapeElements = ref([]);
-const lineElements = ref([]);
 
 // Textes captivants pour l'effet de typing
 const captivatingTexts = [
@@ -129,54 +109,127 @@ const captivatingTexts = [
 // Index du texte actuel
 let currentTextIndex = 0;
 
-// Données pour les formes géométriques avec couleurs adaptatives
-const geometricShapes = Array.from({ length: 12 }, (_, i) => ({
-	left: Math.random() * 100,
-	top: Math.random() * 100,
-	size: Math.random() * 100 + 50,
-	rotation: Math.random() * 360,
-	color: `hsl(${Math.random() * 60 + 160}, 70%, 50%)`, // Ajusté pour les tons émeraude
-	type: i % 3 === 0 ? "rounded-full" : i % 3 === 1 ? "rounded-lg" : "",
-}));
+// Configuration des particules tsParticles
+const particleOptions = {
+	background: {
+		color: {
+			value: "transparent",
+		},
+	},
+	fpsLimit: 120,
+	interactivity: {
+		events: {
+			onClick: {
+				enable: true,
+				mode: "push",
+			},
+			onHover: {
+				enable: true,
+				mode: "repulse",
+				// J'ai désactivé le parallax qui peut parfois causer des problèmes de rendu
+				// parallax: {
+				// 	enable: true,
+				// 	force: 60,
+				// 	smooth: 10,
+				// },
+			},
+			resize: true,
+		},
+		modes: {
+			bubble: {
+				distance: 400,
+				duration: 2,
+				opacity: 0.8,
+				size: 40,
+			},
+			push: {
+				quantity: 4,
+			},
+			repulse: {
+				distance: 200,
+				duration: 0.4,
+			},
+		},
+	},
+	particles: {
+		color: {
+			value: ["#10b981", "#14b8a6", "#06b6d4"],
+			animation: {
+				enable: true,
+				speed: 20,
+				sync: false,
+			},
+		},
+		links: {
+			color: "#10b981",
+			distance: 150,
+			enable: true,
+			opacity: 0.5,
+			width: 1,
+		},
+		move: {
+			direction: "none",
+			enable: true,
+			outModes: {
+				default: "bounce",
+			},
+			random: false,
+			speed: 2,
+			straight: false,
+		},
+		number: {
+			density: {
+				enable: true,
+				area: 800,
+			},
+			value: 80,
+		},
+		opacity: {
+			value: 0.5,
+			animation: {
+				enable: true,
+				speed: 1,
+				sync: false,
+			},
+		},
+		shape: {
+			type: "circle",
+		},
+		size: {
+			value: { min: 1, max: 5 },
+			animation: {
+				enable: true,
+				speed: 5,
+				sync: false,
+			},
+		},
+	},
+	detectRetina: true,
+};
 
-// Données pour les lignes connectrices - initialisées comme tableau vide
-const connectionLines = ref([]);
-
-// Variables pour les particules sur canvas
-let particles = [];
-let animationId = null;
-let mousePosition = { x: 0, y: 0 };
-let isDarkMode = false;
+// *** LA SOLUTION CLÉ EST ICI ***
+// Callback quand les particules sont chargées
+const particlesLoaded = async (container) => {
+	console.log("Particles container loaded", container);
+	// On récupère l'élément canvas réel
+	const canvas = container.canvas.element;
+	if (canvas) {
+		// On force le style du canvas pour qu'il reste dans son conteneur
+		// C'est la solution la plus robuste
+		canvas.style.position = "absolute";
+		canvas.style.top = "0";
+		canvas.style.left = "0";
+		canvas.style.width = "100%";
+		canvas.style.height = "100%";
+	}
+};
 
 // Timeline pour les animations
 let tl = null;
 let typingTimeline = null;
-let mouseMoveHandler = null;
-
-// Détecter le mode sombre
-function detectDarkMode() {
-	// Vérification que nous sommes côté client
-	if (typeof window !== "undefined") {
-		isDarkMode =
-			document.documentElement.classList.contains("dark") ||
-			window.matchMedia("(prefers-color-scheme: dark)").matches;
-		updateParticleColors();
-	}
-}
-
-// Mettre à jour les couleurs des particules selon le mode
-function updateParticleColors() {
-	const baseHue = isDarkMode ? 160 : 160; // Ajusté pour les tons émeraude
-	const saturation = isDarkMode ? 70 : 60;
-	const lightness = isDarkMode ? 60 : 50;
-
-	particles.forEach((particle) => {
-		particle.color = `hsl(${baseHue + Math.random() * 60}, ${saturation}%, ${lightness}%)`;
-	});
-}
 
 /**
- * Fonction pour l'effet de typing avec animation d'envoi
+ * Fonction pour l'effet de typing
  */
 function typeText(text, element, cursor, onComplete) {
 	if (typingTimeline) {
@@ -235,147 +288,13 @@ function rotateTexts() {
 	}
 }
 
-// Initialisation des particules sur canvas avec adaptation au mode
-function initParticles() {
-	// Vérification que nous sommes côté client
-	if (typeof window === "undefined") return () => {};
-
-	const canvas = particleCanvas.value;
-	const ctx = canvas.getContext("2d");
-
-	// Définir la taille du canvas
-	function resizeCanvas() {
-		canvas.width = window.innerWidth;
-		canvas.height = window.innerHeight;
-	}
-	resizeCanvas();
-	window.addEventListener("resize", resizeCanvas);
-
-	// Créer les particules
-	particles = [];
-	const particleCount = 100;
-
-	for (let i = 0; i < particleCount; i++) {
-		const baseHue = 160; // Ajusté pour les tons émeraude
-		particles.push({
-			x: Math.random() * canvas.width,
-			y: Math.random() * canvas.height,
-			vx: (Math.random() - 0.5) * 0.5,
-			vy: (Math.random() - 0.5) * 0.5,
-			radius: Math.random() * 2 + 1,
-			color: `hsl(${baseHue + Math.random() * 60}, ${isDarkMode ? 70 : 60}%, ${isDarkMode ? 60 : 50}%)`,
-		});
-	}
-
-	// Fonction d'animation des particules
-	function animateParticles() {
-		ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-		// Mettre à jour et dessiner les particules
-		particles.forEach((particle) => {
-			// Mettre à jour la position
-			particle.x += particle.vx;
-			particle.y += particle.vy;
-
-			// Rebondir sur les bords
-			if (particle.x < 0 || particle.x > canvas.width) particle.vx *= -1;
-			if (particle.y < 0 || particle.y > canvas.height) particle.vy *= -1;
-
-			// Interaction avec la souris
-			const dx = mousePosition.x - particle.x;
-			const dy = mousePosition.y - particle.y;
-			const distance = Math.sqrt(dx * dx + dy * dy);
-
-			if (distance < 100) {
-				const force = (100 - distance) / 100;
-				particle.vx -= (dx / distance) * force * 0.2;
-				particle.vy -= (dy / distance) * force * 0.2;
-			}
-
-			// Limiter la vitesse
-			const speed = Math.sqrt(
-				particle.vx * particle.vx + particle.vy * particle.vy
-			);
-			if (speed > 2) {
-				particle.vx = (particle.vx / speed) * 2;
-				particle.vy = (particle.vy / speed) * 2;
-			}
-
-			// Dessiner la particule
-			ctx.beginPath();
-			ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
-			ctx.fillStyle = particle.color;
-			ctx.fill();
-
-			// Dessiner les connexions entre particules proches
-			particles.forEach((otherParticle) => {
-				if (particle === otherParticle) return;
-
-				const dx = particle.x - otherParticle.x;
-				const dy = particle.y - otherParticle.y;
-				const distance = Math.sqrt(dx * dx + dy * dy);
-
-				if (distance < 100) {
-					ctx.beginPath();
-					ctx.moveTo(particle.x, particle.y);
-					ctx.lineTo(otherParticle.x, otherParticle.y);
-					const connectionColor = isDarkMode
-						? `rgba(16, 185, 129, ${0.2 * (1 - distance / 100)})` // Ajusté pour émeraude
-						: `rgba(5, 150, 105, ${0.15 * (1 - distance / 100)})`; // Ajusté pour émeraude
-					ctx.strokeStyle = connectionColor;
-					ctx.lineWidth = 0.5;
-					ctx.stroke();
-				}
-			});
-		});
-
-		animationId = requestAnimationFrame(animateParticles);
-	}
-
-	animateParticles();
-
-	return () => {
-		window.removeEventListener("resize", resizeCanvas);
-		if (animationId) {
-			cancelAnimationFrame(animationId);
-		}
-	};
-}
-
 onMounted(() => {
-	// Vérification que nous sommes côté client
 	if (typeof window === "undefined") return;
-
-	// Initialiser les lignes connectrices maintenant que window est disponible
-	connectionLines.value = Array.from({ length: 8 }, () => ({
-		x1: Math.random() * window.innerWidth,
-		y1: Math.random() * window.innerHeight,
-		x2: Math.random() * window.innerWidth,
-		y2: Math.random() * window.innerHeight,
-		color: `hsl(${Math.random() * 60 + 160}, 70%, 50%)`, // Ajusté pour les tons émeraude
-	}));
-
-	// Détecter le mode initial
-	detectDarkMode();
-
-	// Écouter les changements de mode
-	const darkModeMediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-	darkModeMediaQuery.addEventListener("change", detectDarkMode);
-
-	// Observer les changements de classe sur l'élément html
-	const observer = new MutationObserver(detectDarkMode);
-	observer.observe(document.documentElement, {
-		attributes: true,
-		attributeFilter: ["class"],
-	});
-
-	// Initialiser les particules sur canvas
-	const cleanupParticles = initParticles();
 
 	// Animation initiale des éléments
 	tl = gsap.timeline();
 
-	// Animation du titre avec effet adaptatif
+	// Animation du titre
 	tl.from(titleElement.value, {
 		y: 50,
 		opacity: 0,
@@ -394,7 +313,7 @@ onMounted(() => {
 		.from(
 			titleElement.value.querySelector("span:last-child"),
 			{
-				textShadow: "0 0 0px rgba(5,150,105,0)", // Ajusté pour émeraude
+				textShadow: "0 0 0px rgba(5,150,105,0)",
 				duration: 1.5,
 				ease: "power2.out",
 			},
@@ -451,88 +370,18 @@ onMounted(() => {
 		},
 		"-=0.2"
 	);
+});
 
-	// Animation des formes géométriques
-	shapeElements.value.forEach((shape, index) => {
-		gsap.to(shape, {
-			rotation: "+=360",
-			duration: 20 + index * 5,
-			repeat: -1,
-			ease: "none",
-		});
-
-		gsap.to(shape, {
-			x: "random(-50, 50)",
-			y: "random(-50, 50)",
-			duration: 10 + index * 2,
-			repeat: -1,
-			yoyo: true,
-			ease: "sine.inOut",
-		});
-	});
-
-	// Animation des lignes connectrices
-	lineElements.value.forEach((line, index) => {
-		gsap.to(line, {
-			attr: {
-				x1: `random(0, ${window.innerWidth})`,
-				y1: `random(0, ${window.innerHeight})`,
-				x2: `random(0, ${window.innerWidth})`,
-				y2: `random(0, ${window.innerHeight})`,
-			},
-			duration: 15 + index * 3,
-			repeat: -1,
-			yoyo: true,
-			ease: "sine.inOut",
-		});
-	});
-
-	// Effet parallaxe au mouvement de la souris
-	mouseMoveHandler = (e) => {
-		const { clientX, clientY } = e;
-		const { innerWidth, innerHeight } = window;
-
-		// Mettre à jour la position de la souris pour les particules
-		mousePosition.x = clientX;
-		mousePosition.y = clientY;
-
-		// Calcul du mouvement parallaxe
-		const xPos = (clientX - innerWidth / 2) / innerWidth;
-		const yPos = (clientY - innerHeight / 2) / innerHeight;
-
-		// Appliquer le mouvement aux formes géométriques
-		shapeElements.value.forEach((shape, index) => {
-			const speed = (index + 1) * 0.5;
-			gsap.to(shape, {
-				x: xPos * speed,
-				y: yPos * speed,
-				duration: 1,
-				ease: "power2.out",
-			});
-		});
-	};
-
-	// Ajouter l'écouteur d'événement de mouvement de souris
-	heroSection.value.addEventListener("mousemove", mouseMoveHandler);
-
-	// Nettoyage lors du démontage
-	onUnmounted(() => {
-		cleanupParticles();
-		darkModeMediaQuery.removeEventListener("change", detectDarkMode);
-		observer.disconnect();
-		if (heroSection.value && mouseMoveHandler) {
-			heroSection.value.removeEventListener("mousemove", mouseMoveHandler);
-		}
-		if (tl) {
-			tl.kill();
-		}
-		if (typingTimeline) {
-			typingTimeline.kill();
-		}
-	});
+onUnmounted(() => {
+	if (tl) {
+		tl.kill();
+	}
+	if (typingTimeline) {
+		typingTimeline.kill();
+	}
 });
 </script>
 
 <style scoped>
-/* Styles personnalisés si nécessaire */
+/* Pas besoin de styles supplémentaires, tout est géré par Tailwind et le script */
 </style>
