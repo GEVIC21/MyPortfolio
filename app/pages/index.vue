@@ -7,8 +7,8 @@
 		<section
 			id="projets"
 			class="py-20 bg-emerald-50 dark:bg-emerald-900/20 w-full">
-			<div class="w-full">
-				<div class="text-center mb-12 px-4 sm:px-6 lg:px-8">
+			<div class="container mx-auto px-4 sm:px-6 lg:px-8">
+				<div class="text-center mb-12">
 					<h2
 						class="text-3xl lg:text-4xl font-bold text-emerald-900 dark:text-emerald-100 mb-4">
 						Projets en Vedette
@@ -21,8 +21,7 @@
 				</div>
 
 				<!-- Grille de projets featured -->
-				<div
-					class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12 px-4 sm:px-6 lg:px-8">
+				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
 					<UCard
 						v-for="project in featuredProjects"
 						:key="project.id"
@@ -34,7 +33,9 @@
 								:alt="project.title"
 								class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
 								format="webp"
-								loading="lazy" />
+								loading="lazy"
+								width="400"
+								height="300" />
 							<div
 								class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
@@ -110,7 +111,7 @@
 					</UCard>
 				</div>
 
-				<div class="text-center px-4 sm:px-6 lg:px-8">
+				<div class="text-center">
 					<UButton
 						to="/projects"
 						variant="outline"
@@ -126,9 +127,8 @@
 
 		<!-- About Section -->
 		<section id="a-propos" class="py-20 bg-white dark:bg-gray-900 w-full">
-			<div class="w-full">
-				<div
-					class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center px-4 sm:px-6 lg:px-8">
+			<div class="container mx-auto px-4 sm:px-6 lg:px-8">
+				<div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
 					<div>
 						<h2
 							class="text-3xl lg:text-4xl font-bold text-emerald-900 dark:text-emerald-100 mb-6">
@@ -193,24 +193,36 @@
 									src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=300&h=200&fit=crop"
 									alt="Code 1"
 									class="rounded-lg shadow-lg w-full"
-									format="webp" />
+									format="webp"
+									width="300"
+									height="200"
+									loading="lazy" />
 								<NuxtImg
 									src="https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=300&h=200&fit=crop"
 									alt="Code 2"
 									class="rounded-lg shadow-lg w-full mt-4"
-									format="webp" />
+									format="webp"
+									width="300"
+									height="200"
+									loading="lazy" />
 							</div>
 							<div class="space-y-4 mt-8">
 								<NuxtImg
 									src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=300&h=200&fit=crop"
 									alt="Code 3"
 									class="rounded-lg shadow-lg w-full"
-									format="webp" />
+									format="webp"
+									width="300"
+									height="200"
+									loading="lazy" />
 								<NuxtImg
 									src="https://images.unsplash.com/photo-1517183324250-764b7ea8b9d0?w=300&h=200&fit=crop"
 									alt="Code 4"
 									class="rounded-lg shadow-lg w-full mt-4"
-									format="webp" />
+									format="webp"
+									width="300"
+									height="200"
+									loading="lazy" />
 							</div>
 						</div>
 						<!-- Élément décoratif -->
@@ -225,8 +237,8 @@
 
 		<!-- Skills Section -->
 		<section class="py-20 bg-emerald-50 dark:bg-emerald-900/20 w-full">
-			<div class="w-full">
-				<div class="text-center mb-12 px-4 sm:px-6 lg:px-8">
+			<div class="container mx-auto px-4 sm:px-6 lg:px-8">
+				<div class="text-center mb-12">
 					<h2
 						class="text-3xl lg:text-4xl font-bold text-emerald-900 dark:text-emerald-100 mb-4">
 						Mes Compétences Clés
@@ -238,7 +250,7 @@
 					</p>
 				</div>
 
-				<div class="grid grid-cols-1 md:grid-cols-3 gap-8 px-4 sm:px-6 lg:px-8">
+				<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
 					<UCard class="shadow-sm border-emerald-200 dark:border-emerald-700">
 						<template #header>
 							<div class="flex items-center justify-between">
@@ -447,8 +459,8 @@
 					class="absolute top-1/2 left-1/4 w-16 h-16 bg-white/5 rounded-full blur-lg"></div>
 			</div>
 
-			<div class="relative z-10 w-full">
-				<div class="text-center px-4 sm:px-6 lg:px-8">
+			<div class="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
+				<div class="text-center">
 					<UBadge
 						label="Contact"
 						variant="subtle"

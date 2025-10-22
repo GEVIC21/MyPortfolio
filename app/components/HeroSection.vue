@@ -2,38 +2,36 @@
 	<section
 		ref="heroSection"
 		class="relative min-h-screen flex items-center justify-center w-full">
-		<!-- 
-            Le conteneur des particules. 
-            'absolute inset-0' le positionne pour couvrir toute la section.
-            'overflow-hidden' est CRUCIAL pour s'assurer que rien ne dépasse.
-        -->
+		<!--
+      Particle container.
+      'absolute inset-0' positions it to cover the entire section.
+      'overflow-hidden' is crucial to prevent overflow.
+    -->
 		<div class="absolute inset-0 z-0 overflow-hidden">
-			<!-- 
-                Particules tsParticles.
-                NOTE : L'ID est maintenant unique pour éviter les conflits.
-            -->
+			<!--
+        tsParticles component.
+        Unique ID to avoid conflicts.
+      -->
 			<vue-particles
 				id="tsparticles-hero"
 				class="w-full h-full"
 				:options="particleOptions"
 				@particles-loaded="particlesLoaded" />
 		</div>
-
-		<!-- Contenu du hero -->
+		<!-- Hero content -->
 		<div class="relative z-10 text-center w-full px-4 sm:px-6 lg:px-8">
 			<div ref="titleElement" class="mb-6">
 				<h1 class="text-5xl md:text-7xl font-bold mb-4">
 					<span
-						class="block text-emerald-900 dark:text-emerald-200/90 drop-shadow-[0_2px_10px_rgba(0,0,0,0.3)] dark:drop-shadow-[0_0_8px_rgba(255,255,255,0.3)]"
-						>Hey, salut!</span
-					>
+						class="block text-emerald-900 dark:text-emerald-200/90 drop-shadow-[0_2px_10px_rgba(0,0,0,0.3)] dark:drop-shadow-[0_0_8px_rgba(255,255,255,0.3)]">
+						Hey, salut!
+					</span>
 					<span
-						class="block text-transparent bg-clip-text bg-gradient-to-r from-emerald-800 via-teal-700 to-cyan-700 dark:from-emerald-400/90 dark:via-teal-400/90 dark:to-cyan-400/90 drop-shadow-[0_2px_15px_rgba(5,150,105,0.4)] dark:drop-shadow-[0_0_15px_rgba(52,211,153,0.5)]"
-						>Je suis NDILBE DOUVIC</span
-					>
+						class="block text-transparent bg-clip-text bg-gradient-to-r from-emerald-800 via-teal-700 to-cyan-700 dark:from-emerald-400/90 dark:via-teal-400/90 dark:to-cyan-400/90 drop-shadow-[0_2px_15px_rgba(5,150,105,0.4)] dark:drop-shadow-[0_0_15px_rgba(52,211,153,0.5)]">
+						Je suis NDILBE DOUVIC
+					</span>
 				</h1>
 			</div>
-
 			<div ref="subtitleElement" class="mb-8">
 				<p
 					class="text-xl md:text-2xl text-emerald-900 dark:text-emerald-300/90 mb-4 drop-shadow-[0_1px_5px_rgba(0,0,0,0.2)] dark:drop-shadow-[0_0_3px_rgba(255,255,255,0.2)]">
@@ -41,8 +39,7 @@
 					numériques
 				</p>
 			</div>
-
-			<!-- Textes captivants avec effet de typing -->
+			<!-- Typing effect text -->
 			<div ref="typingElement" class="mb-8 h-20">
 				<p
 					class="text-xl md:text-2xl text-emerald-800 dark:text-emerald-300/90 font-medium drop-shadow-[0_1px_8px_rgba(5,150,105,0.4)] dark:drop-shadow-[0_0_8px_rgba(52,211,153,0.7)]">
@@ -52,7 +49,6 @@
 						class="inline-block w-1 h-6 bg-emerald-700 dark:bg-emerald-300/90 ml-1 align-middle"></span>
 				</p>
 			</div>
-
 			<div
 				ref="buttonElement"
 				class="flex flex-col sm:flex-row gap-4 justify-center">
@@ -65,8 +61,7 @@
 				</UButton>
 			</div>
 		</div>
-
-		<!-- Indicateur de défilement -->
+		<!-- Scroll indicator -->
 		<div
 			ref="scrollIndicator"
 			class="absolute bottom-8 left-1/2 transform -translate-x-1/2">
@@ -84,21 +79,21 @@
 	</section>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { gsap } from "gsap";
 import { onMounted, onUnmounted, ref } from "vue";
 
-// Références aux éléments DOM
-const heroSection = ref(null);
-const titleElement = ref(null);
-const subtitleElement = ref(null);
-const typingElement = ref(null);
-const typingText = ref(null);
-const typingCursor = ref(null);
-const buttonElement = ref(null);
-const scrollIndicator = ref(null);
+// DOM element references
+const heroSection = ref<HTMLElement | null>(null);
+const titleElement = ref<HTMLElement | null>(null);
+const subtitleElement = ref<HTMLElement | null>(null);
+const typingElement = ref<HTMLElement | null>(null);
+const typingText = ref<HTMLElement | null>(null);
+const typingCursor = ref<HTMLElement | null>(null);
+const buttonElement = ref<HTMLElement | null>(null);
+const scrollIndicator = ref<HTMLElement | null>(null);
 
-// Textes captivants pour l'effet de typing
+// Captivating texts for typing effect
 const captivatingTexts = [
 	"Je conçois des interfaces qui allient esthétique et fonctionnalité.",
 	"Je développe des solutions robustes avec les technologies modernes.",
@@ -106,11 +101,15 @@ const captivatingTexts = [
 	"Je transforme les défis complexes en expériences utilisateur fluides.",
 ];
 
-// Index du texte actuel
+// Current text index
 let currentTextIndex = 0;
 
-// Configuration des particules tsParticles
+// tsParticles configuration
 const particleOptions = {
+	fullScreen: {
+		enable: false, // Explicitly disable fullScreen to confine particles
+		zIndex: 0, // Ensure particles stay behind content
+	},
 	background: {
 		color: {
 			value: "transparent",
@@ -126,14 +125,10 @@ const particleOptions = {
 			onHover: {
 				enable: true,
 				mode: "repulse",
-				// J'ai désactivé le parallax qui peut parfois causer des problèmes de rendu
-				// parallax: {
-				// 	enable: true,
-				// 	force: 60,
-				// 	smooth: 10,
-				// },
 			},
-			resize: true,
+			resize: {
+				enable: true,
+			},
 		},
 		modes: {
 			bubble: {
@@ -168,10 +163,10 @@ const particleOptions = {
 			width: 1,
 		},
 		move: {
-			direction: "none",
+			direction: "none" as const,
 			enable: true,
 			outModes: {
-				default: "bounce",
+				default: "bounce" as const,
 			},
 			random: false,
 			speed: 2,
@@ -193,7 +188,7 @@ const particleOptions = {
 			},
 		},
 		shape: {
-			type: "circle",
+			type: "circle" as const,
 		},
 		size: {
 			value: { min: 1, max: 5 },
@@ -207,39 +202,41 @@ const particleOptions = {
 	detectRetina: true,
 };
 
-// *** LA SOLUTION CLÉ EST ICI ***
-// Callback quand les particules sont chargées
-const particlesLoaded = async (container) => {
+// Callback when particles are loaded
+const particlesLoaded = async (container: any) => {
 	console.log("Particles container loaded", container);
-	// On récupère l'élément canvas réel
-	const canvas = container.canvas.element;
-	if (canvas) {
-		// On force le style du canvas pour qu'il reste dans son conteneur
-		// C'est la solution la plus robuste
+	const canvas = container.canvas.element as HTMLCanvasElement;
+	if (canvas && heroSection.value) {
+		// Force canvas to stay within parent container
 		canvas.style.position = "absolute";
 		canvas.style.top = "0";
 		canvas.style.left = "0";
 		canvas.style.width = "100%";
 		canvas.style.height = "100%";
+		canvas.style.zIndex = "0";
+		// Ensure canvas respects parent bounds
+		const parent = heroSection.value;
+		canvas.width = parent.clientWidth;
+		canvas.height = parent.clientHeight;
 	}
 };
 
-// Timeline pour les animations
-let tl = null;
-let typingTimeline = null;
+// GSAP timelines
+let tl: gsap.core.Timeline | null = null;
+let typingTimeline: gsap.core.Timeline | null = null;
 
-/**
- * Fonction pour l'effet de typing
- */
-function typeText(text, element, cursor, onComplete) {
+// Typing effect function
+function typeText(
+	text: string,
+	element: HTMLElement,
+	cursor: HTMLElement,
+	onComplete: () => void
+) {
 	if (typingTimeline) {
 		typingTimeline.kill();
 	}
-
 	typingTimeline = gsap.timeline({ onComplete });
-
 	gsap.set(element, { textContent: "", x: 0, opacity: 1 });
-
 	const cursorAnimation = gsap.to(cursor, {
 		opacity: 0,
 		duration: 0.4,
@@ -247,16 +244,14 @@ function typeText(text, element, cursor, onComplete) {
 		yoyo: true,
 		ease: "power2.inOut",
 	});
-
 	const progress = { value: 0 };
 	const typingSpeed = 0.08;
-
 	typingTimeline
 		.to(progress, {
 			value: text.length,
 			duration: text.length * typingSpeed,
 			ease: "none",
-			onUpdate: function () {
+			onUpdate: () => {
 				const currentLength = Math.floor(progress.value);
 				element.textContent = text.substring(0, currentLength);
 			},
@@ -273,7 +268,7 @@ function typeText(text, element, cursor, onComplete) {
 		.set(element, { x: 0, opacity: 1 });
 }
 
-// Fonction pour faire défiler les textes
+// Rotate through texts
 function rotateTexts() {
 	if (typingText.value && typingCursor.value) {
 		typeText(
@@ -291,85 +286,85 @@ function rotateTexts() {
 onMounted(() => {
 	if (typeof window === "undefined") return;
 
-	// Animation initiale des éléments
+	// Initial animations
 	tl = gsap.timeline();
-
-	// Animation du titre
-	tl.from(titleElement.value, {
-		y: 50,
-		opacity: 0,
-		duration: 1,
-		ease: "power3.out",
-	})
-		.from(
-			titleElement.value.querySelector("span:first-child"),
+	if (titleElement.value) {
+		tl.from(titleElement.value, {
+			y: 50,
+			opacity: 0,
+			duration: 1,
+			ease: "power3.out",
+		})
+			.from(
+				titleElement.value.querySelector("span:first-child"),
+				{
+					textShadow: "0 0 0px rgba(0,0,0,0)",
+					duration: 1.5,
+					ease: "power2.out",
+				},
+				"-=0.8"
+			)
+			.from(
+				titleElement.value.querySelector("span:last-child"),
+				{
+					textShadow: "0 0 0px rgba(5,150,105,0)",
+					duration: 1.5,
+					ease: "power2.out",
+				},
+				"-=1.2"
+			);
+	}
+	if (subtitleElement.value) {
+		tl.from(
+			subtitleElement.value,
 			{
-				textShadow: "0 0 0px rgba(0,0,0,0)",
-				duration: 1.5,
-				ease: "power2.out",
+				y: 30,
+				opacity: 0,
+				duration: 0.8,
+				ease: "power3.out",
 			},
-			"-=0.8"
-		)
-		.from(
-			titleElement.value.querySelector("span:last-child"),
-			{
-				textShadow: "0 0 0px rgba(5,150,105,0)",
-				duration: 1.5,
-				ease: "power2.out",
-			},
-			"-=1.2"
+			"-=0.6"
 		);
-
-	// Animation du sous-titre
-	tl.from(
-		subtitleElement.value,
-		{
-			y: 30,
-			opacity: 0,
-			duration: 0.8,
-			ease: "power3.out",
-		},
-		"-=0.6"
-	);
-
-	// Animation de l'élément de typing
-	tl.from(
-		typingElement.value,
-		{
-			y: 30,
-			opacity: 0,
-			duration: 0.8,
-			ease: "power3.out",
-			onComplete: () => {
-				rotateTexts();
+	}
+	if (typingElement.value) {
+		tl.from(
+			typingElement.value,
+			{
+				y: 30,
+				opacity: 0,
+				duration: 0.8,
+				ease: "power3.out",
+				onComplete: () => {
+					rotateTexts();
+				},
 			},
-		},
-		"-=0.4"
-	);
-
-	// Animation des boutons
-	tl.from(
-		buttonElement.value,
-		{
-			y: 30,
-			opacity: 0,
-			duration: 0.8,
-			ease: "power3.out",
-		},
-		"-=0.4"
-	);
-
-	// Animation de l'indicateur de défilement
-	tl.from(
-		scrollIndicator.value,
-		{
-			y: 20,
-			opacity: 0,
-			duration: 0.6,
-			ease: "power3.out",
-		},
-		"-=0.2"
-	);
+			"-=0.4"
+		);
+	}
+	if (buttonElement.value) {
+		tl.from(
+			buttonElement.value,
+			{
+				y: 30,
+				opacity: 0,
+				duration: 0.8,
+				ease: "power3.out",
+			},
+			"-=0.4"
+		);
+	}
+	if (scrollIndicator.value) {
+		tl.from(
+			scrollIndicator.value,
+			{
+				y: 20,
+				opacity: 0,
+				duration: 0.6,
+				ease: "power3.out",
+			},
+			"-=0.2"
+		);
+	}
 });
 
 onUnmounted(() => {
@@ -383,5 +378,5 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-/* Pas besoin de styles supplémentaires, tout est géré par Tailwind et le script */
+/* No additional styles needed; Tailwind and script handle everything */
 </style>
