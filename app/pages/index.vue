@@ -100,7 +100,7 @@
 								</UButton>
 							</div>
 							<UButton
-								:to="`/projects/${project.id}`"
+								:to="`/${project.id}`"
 								size="sm"
 								color="emerald"
 								variant="ghost"
