@@ -13,6 +13,8 @@ export interface Project {
 	year: number;
 	client?: string;
 	duration?: string;
+	// Ajout du champ featured pour les projets phares
+	featured?: boolean;
 }
 
 export const projects: Project[] = [
@@ -28,10 +30,11 @@ export const projects: Project[] = [
 		status: "Terminé",
 		demo: "https://transport.suisco.net/",
 		type: "client",
-		tags: ["web"],
+		tags: ["web", "laravel", "transport"],
 		year: 2024,
 		client: "SuiSco",
 		duration: "3 mois",
+		featured: true, // Marqué comme projet phare
 	},
 	{
 		id: "2",
@@ -44,10 +47,11 @@ export const projects: Project[] = [
 		status: "Terminé",
 		demo: "https://hotel-management-system-9qrv.onrender.com/",
 		type: "client",
-		tags: ["web"],
+		tags: ["web", "laravel", "vuejs", "hotel"],
 		year: 2024,
 		client: "Youdoudou Hotel",
 		duration: "4 mois",
+		featured: true, // Marqué comme projet phare
 	},
 ];
 

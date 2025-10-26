@@ -1,7 +1,8 @@
 <template>
 	<section
 		ref="heroSection"
-		class="relative min-h-screen flex items-center justify-center w-full">
+		:style="heroStyles"
+		class="relative flex items-center justify-center w-full">
 		<!--
       Particle container.
       'absolute inset-0' positions it to cover the entire section.
@@ -18,49 +19,110 @@
 				:options="particleOptions"
 				@particles-loaded="particlesLoaded" />
 		</div>
-		<!-- Hero content -->
-		<div class="relative z-10 text-center w-full px-4 sm:px-6 lg:px-8">
-			<div ref="titleElement" class="mb-6">
-				<h1 class="text-5xl md:text-7xl font-bold mb-4">
-					<span
-						class="block text-emerald-900 dark:text-emerald-200/90 drop-shadow-[0_2px_10px_rgba(0,0,0,0.3)] dark:drop-shadow-[0_0_8px_rgba(255,255,255,0.3)]">
-						Hey, salut!
-					</span>
-					<span
-						class="block text-transparent bg-clip-text bg-gradient-to-r from-emerald-800 via-teal-700 to-cyan-700 dark:from-emerald-400/90 dark:via-teal-400/90 dark:to-cyan-400/90 drop-shadow-[0_2px_15px_rgba(5,150,105,0.4)] dark:drop-shadow-[0_0_15px_rgba(52,211,153,0.5)]">
-						Je suis NDILBE DOUVIC
-					</span>
-				</h1>
-			</div>
-			<div ref="subtitleElement" class="mb-8">
-				<p
-					class="text-xl md:text-2xl text-emerald-900 dark:text-emerald-300/90 mb-4 drop-shadow-[0_1px_5px_rgba(0,0,0,0.2)] dark:drop-shadow-[0_0_3px_rgba(255,255,255,0.2)]">
-					Créateur passionné par la transformation d'idées en expériences
-					numériques
-				</p>
-			</div>
-			<!-- Typing effect text -->
-			<div ref="typingElement" class="mb-8 h-20">
-				<p
-					class="text-xl md:text-2xl text-emerald-800 dark:text-emerald-300/90 font-medium drop-shadow-[0_1px_8px_rgba(5,150,105,0.4)] dark:drop-shadow-[0_0_8px_rgba(52,211,153,0.7)]">
-					<span ref="typingText"></span>
-					<span
-						ref="typingCursor"
-						class="inline-block w-1 h-6 bg-emerald-700 dark:bg-emerald-300/90 ml-1 align-middle"></span>
-				</p>
-			</div>
-			<div
-				ref="buttonElement"
-				class="flex flex-col sm:flex-row gap-4 justify-center">
-				<UButton
-					to="#projets"
-					size="xl"
-					class="shadow-lg shadow-emerald-500/25 dark:shadow-emerald-500/25 hover:shadow-emerald-500/40 dark:hover:shadow-emerald-500/40 transition-all duration-300 bg-gradient-to-r from-emerald-600 to-teal-600 dark:from-emerald-600/90 dark:to-teal-600/90 hover:from-emerald-700 hover:to-teal-700 dark:hover:from-emerald-700/90 dark:hover:to-teal-700/90 text-white"
-					trailing-icon="i-heroicons-arrow-right-20-solid">
-					Découvrir mes réalisations
-				</UButton>
+
+		<!-- Hero content avec photo -->
+		<div class="relative z-10 w-full px-4 sm:px-6 lg:px-8">
+			<div class="max-w-7xl mx-auto">
+				<div
+					class="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16">
+					<!-- Contenu texte -->
+					<div class="flex-1 text-center lg:text-left">
+						<div ref="titleElement" class="mb-6">
+							<h1 class="text-5xl md:text-7xl font-bold mb-4">
+								<span
+									class="block text-emerald-900 dark:text-emerald-200/90 drop-shadow-[0_2px_10px_rgba(0,0,0,0.3)] dark:drop-shadow-[0_0_8px_rgba(255,255,255,0.3)]">
+									Hey, salut!
+								</span>
+								<span
+									class="block text-transparent bg-clip-text bg-gradient-to-r from-emerald-800 via-teal-700 to-cyan-700 dark:from-emerald-400/90 dark:via-teal-400/90 dark:to-cyan-400/90 drop-shadow-[0_2px_15px_rgba(5,150,105,0.4)] dark:drop-shadow-[0_0_15px_rgba(52,211,153,0.5)]">
+									Je suis NDILBE DOUVIC
+								</span>
+							</h1>
+						</div>
+						<div ref="subtitleElement" class="mb-8">
+							<p
+								class="text-xl md:text-2xl text-emerald-900 dark:text-emerald-300/90 mb-4 drop-shadow-[0_1px_5px_rgba(0,0,0,0.2)] dark:drop-shadow-[0_0_3px_rgba(255,255,255,0.2)]">
+								Créateur passionné par la transformation d'idées en expériences
+								numériques
+							</p>
+						</div>
+						<!-- Typing effect text -->
+						<div ref="typingElement" class="mb-8 h-20">
+							<p
+								class="text-xl md:text-2xl text-emerald-800 dark:text-emerald-300/90 font-medium drop-shadow-[0_1px_8px_rgba(5,150,105,0.4)] dark:drop-shadow-[0_0_8px_rgba(52,211,153,0.7)]">
+								<span ref="typingText"></span>
+								<span
+									ref="typingCursor"
+									class="inline-block w-1 h-6 bg-emerald-700 dark:bg-emerald-300/90 ml-1 align-middle"></span>
+							</p>
+						</div>
+						<div
+							ref="buttonElement"
+							class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+							<UButton
+								to="#projets"
+								size="xl"
+								class="shadow-lg shadow-emerald-500/25 dark:shadow-emerald-500/25 hover:shadow-emerald-500/40 dark:hover:shadow-emerald-500/40 transition-all duration-300 bg-gradient-to-r from-emerald-600 to-teal-600 dark:from-emerald-600/90 dark:to-teal-600/90 hover:from-emerald-700 hover:to-teal-700 dark:hover:from-emerald-700/90 dark:hover:to-teal-700/90 text-white"
+								trailing-icon="i-heroicons-arrow-right-20-solid">
+								Découvrir mes réalisations
+							</UButton>
+						</div>
+					</div>
+
+					<!-- Photo de profil avec design moderne -->
+					<div ref="profileContainer" class="flex-shrink-0 relative">
+						<!-- Éléments décoratifs autour de la photo -->
+						<div
+							class="absolute inset-0 bg-gradient-to-br from-emerald-400/20 to-teal-600/20 rounded-full blur-3xl scale-110 animate-pulse"></div>
+						<div
+							class="absolute -inset-4 bg-gradient-to-tr from-emerald-500/10 via-transparent to-cyan-500/10 rounded-full blur-2xl"></div>
+
+						<!-- Conteneur de la photo avec effet glassmorphism -->
+						<div class="relative group">
+							<!-- Forme géométrique décorative -->
+							<div
+								class="absolute -inset-2 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-3xl opacity-75 group-hover:opacity-100 transition-opacity duration-300 transform rotate-3 group-hover:rotate-6 transition-transform duration-500"></div>
+
+							<!-- Photo avec bordure et effet -->
+							<div
+								class="relative rounded-2xl overflow-hidden shadow-2xl transform transition-all duration-500 group-hover:scale-105 group-hover:-translate-y-2">
+								<div
+									class="absolute inset-0 bg-gradient-to-br from-emerald-500/20 to-teal-600/20 mix-blend-overlay"></div>
+								<img
+									src="/Hero.jpg"
+									class="w-64 h-64 md:w-80 md:h-80 object-cover" />
+
+								<!-- Overlay au hover -->
+								<div
+									class="absolute inset-0 bg-gradient-to-t from-emerald-900/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-6">
+									<div class="text-white text-center">
+										<p class="text-sm font-medium mb-1">Disponible pour</p>
+										<p class="text-lg font-bold">Freelance & Collaboration</p>
+									</div>
+								</div>
+							</div>
+
+							<!-- Badges sociaux -->
+							<div class="absolute -bottom-4 -right-4 flex gap-2">
+								<div
+									class="w-12 h-12 bg-white dark:bg-gray-800 rounded-full shadow-lg flex items-center justify-center transform transition-transform duration-300 hover:scale-110 cursor-pointer">
+									<Icon
+										name="i-simple-icons-github"
+										class="w-6 h-6 text-gray-800 dark:text-white" />
+								</div>
+								<div
+									class="w-12 h-12 bg-white dark:bg-gray-800 rounded-full shadow-lg flex items-center justify-center transform transition-transform duration-300 hover:scale-110 cursor-pointer">
+									<Icon
+										name="i-simple-icons-linkedin"
+										class="w-6 h-6 text-blue-600" />
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
+
 		<!-- Scroll indicator -->
 		<div
 			ref="scrollIndicator"
@@ -81,7 +143,7 @@
 
 <script setup lang="ts">
 import { gsap } from "gsap";
-import { onMounted, onUnmounted, ref } from "vue";
+import { onMounted, onUnmounted, ref, computed } from "vue";
 
 // DOM element references
 const heroSection = ref<HTMLElement | null>(null);
@@ -92,6 +154,35 @@ const typingText = ref<HTMLElement | null>(null);
 const typingCursor = ref<HTMLElement | null>(null);
 const buttonElement = ref<HTMLElement | null>(null);
 const scrollIndicator = ref<HTMLElement | null>(null);
+const profileContainer = ref<HTMLElement | null>(null);
+
+// --- NOUVELLE LOGIQUE POUR LA GESTION DU HEADER ---
+const headerHeight = ref(0);
+
+// Fonction pour mettre à jour la hauteur du header
+const updateHeaderHeight = () => {
+	// On cible l'élément header. Adaptez ce sélecteur si votre header a un ID ou une classe spécifique.
+	const header = document.querySelector("header");
+	if (header) {
+		headerHeight.value = (header as HTMLElement).offsetHeight;
+	} else {
+		// Fallback si aucun header n'est trouvé, on suppose une hauteur par défaut (ex: 80px)
+		console.warn(
+			"Aucun élément <header> trouvé. Utilisation d'une hauteur par défaut."
+		);
+		headerHeight.value = 80;
+	}
+};
+
+// Style calculé pour la section hero
+const heroStyles = computed(() => {
+	return {
+		paddingTop: `${headerHeight.value}px`,
+		minHeight: `calc(100vh - ${headerHeight.value}px)`,
+	};
+});
+
+// --- FIN DE LA NOUVELLE LOGIQUE ---
 
 // Captivating texts for typing effect
 const captivatingTexts = [
@@ -107,8 +198,8 @@ let currentTextIndex = 0;
 // tsParticles configuration
 const particleOptions = {
 	fullScreen: {
-		enable: false, // Explicitly disable fullScreen to confine particles
-		zIndex: 0, // Ensure particles stay behind content
+		enable: false,
+		zIndex: 0,
 	},
 	background: {
 		color: {
@@ -286,6 +377,13 @@ function rotateTexts() {
 onMounted(() => {
 	if (typeof window === "undefined") return;
 
+	// --- APPEL DE LA NOUVELLE LOGIQUE ---
+	// Mesurer la hauteur du header au chargement
+	updateHeaderHeight();
+	// Et la remesurer à chaque redimensionnement
+	window.addEventListener("resize", updateHeaderHeight);
+	// --- FIN DE L'APPEL ---
+
 	// Initial animations
 	tl = gsap.timeline();
 	if (titleElement.value) {
@@ -353,6 +451,18 @@ onMounted(() => {
 			"-=0.4"
 		);
 	}
+	if (profileContainer.value) {
+		tl.from(
+			profileContainer.value,
+			{
+				x: 50,
+				opacity: 0,
+				duration: 1,
+				ease: "power3.out",
+			},
+			"-=0.6"
+		);
+	}
 	if (scrollIndicator.value) {
 		tl.from(
 			scrollIndicator.value,
@@ -374,9 +484,29 @@ onUnmounted(() => {
 	if (typingTimeline) {
 		typingTimeline.kill();
 	}
+	// --- NETTOYAGE DE L'ÉCOUTEUR D'ÉVÉNEMENT ---
+	window.removeEventListener("resize", updateHeaderHeight);
 });
 </script>
 
 <style scoped>
-/* No additional styles needed; Tailwind and script handle everything */
+/* Animation pour les éléments décoratifs */
+@keyframes float {
+	0%,
+	100% {
+		transform: translateY(0px);
+	}
+	50% {
+		transform: translateY(-10px);
+	}
+}
+
+.group:hover .group-hover\:rotate-6 {
+	transform: rotate(6deg);
+}
+
+/* Effet de brillance subtil sur la photo */
+.group:hover img {
+	filter: brightness(1.05);
+}
 </style>
