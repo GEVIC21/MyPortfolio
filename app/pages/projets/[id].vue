@@ -580,6 +580,27 @@ const projectImages = computed(() => {
 			alt: `SchoolApp - Vue ${i + 1}`,
 		}));
 	}
+	if (project.value.id === "4") {
+		// SchoolApp
+		return Array.from({ length: 12 }, (_, i) => ({
+			src: `/NewsPortal/${i + 1}.png`,
+			alt: `NewsPortal - Vue ${i + 1}`,
+		}));
+	}
+	if (project.value.id === "5") {
+		// SchoolApp
+		return Array.from({ length: 12 }, (_, i) => ({
+			src: `/SYGEM/${i + 1}.png`,
+			alt: `SYGEM - Vue ${i + 1}`,
+		}));
+	}
+	if (project.value.id === "6") {
+		// SchoolApp
+		return Array.from({ length: 18 }, (_, i) => ({
+			src: `/MaktabNa/${i + 1}.png`,
+			alt: `MaktabNa - Vue ${i + 1}`,
+		}));
+	}
 
 	// Autres projets
 	return Array.from({ length: 4 }, (_, i) => ({

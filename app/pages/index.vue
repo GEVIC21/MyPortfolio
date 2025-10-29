@@ -146,15 +146,39 @@
 				</div>
 
 				<div class="text-center">
-					<UButton
-						to="/projects"
-						variant="outline"
-						size="lg"
-						color="emerald"
-						trailing-icon="i-heroicons-squares-2x2"
-						class="border-emerald-300 text-emerald-700 hover:bg-emerald-50 dark:border-emerald-600 dark:text-emerald-300 dark:hover:bg-emerald-900/30 px-8 py-3 rounded-full font-medium">
+					<a
+						href="/projects"
+						class="inline-flex items-center gap-2 px-8 py-3 text-lg font-medium text-emerald-700 dark:text-emerald-300 border-2 border-emerald-300 dark:border-emerald-600 rounded-full transition-all duration-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/30 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900">
 						Voir tous les projets
-					</UButton>
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							class="h-6 w-6"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke="currentColor"
+							aria-hidden="true">
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6z" />
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6z" />
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2z" />
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+						</svg>
+					</a>
 				</div>
 			</div>
 		</section>
@@ -644,8 +668,8 @@ useHead({
 	],
 });
 
-// Filtrer les projets featured (premiers 6)
-const featuredProjects = computed(() => projects.slice(0, 6));
+// Filtrer les projets featured (premiers 3 projets)
+const featuredProjects = computed(() => projects.slice(0, 3));
 
 // Animation d'entrée pour les cartes de projets
 onMounted(() => {
