@@ -53,6 +53,24 @@ export const projects: Project[] = [
 		duration: "4 mois",
 		featured: true, // Marqué comme projet phare
 	},
+	{
+		id: "3",
+		title: "SchoolApp",
+		description:
+			"Application de gestion scolaire complète pour les établissements d'enseignement primaire et secondaire. Permet la gestion des élèves, des enseignants, des cours, des notes, des bulletins, des emplois du temps et de la communication avec les parents. Interface moderne et intuitive avec tableau de bord analytique, notifications en temps réel, et module de paiement en ligne pour les frais scolaires.",
+		image: "/SchoolApp/1.png",
+		technologies: ["Laravel", "Bootstrap", "MySQL"],
+		category: "Web",
+		status: "Terminé",
+		demo: "#",
+		github: "#",
+		type: "client",
+		tags: ["web", "blade", "laravel", "education", "management"],
+		year: 2024,
+		client: "École Primaire Excellence",
+		duration: "5 mois",
+		featured: false, // Marqué comme projet phare
+	},
 ];
 
 // Fonction utilitaire pour trouver un projet par son ID

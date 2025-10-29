@@ -556,15 +556,35 @@ const currentLightboxIndex = ref(0);
 const showScrollTop = ref(false);
 
 const projectImages = computed(() => {
-	if (!project.value || project.value.id !== "2") {
-		return Array.from({ length: 4 }, (_, i) => ({
-			src: project.value?.image || "",
-			alt: `${project.value?.title} - Image ${i + 1}`,
+	if (!project.value) return [];
+
+	if (project.value.id === "1") {
+		// SuiSco Transport
+		return Array.from({ length: 12 }, (_, i) => ({
+			src: `/SuiscoTransport/${i + 1}.png`,
+			alt: `SuiSco Transport - Capture ${i + 1}`,
 		}));
 	}
-	return Array.from({ length: 16 }, (_, i) => ({
-		src: `/Youdoudou/${i + 1}.png`,
-		alt: `Youdoudou Hotel - Vue ${i + 1}`,
+
+	if (project.value.id === "2") {
+		// Youdoudou Hotel
+		return Array.from({ length: 16 }, (_, i) => ({
+			src: `/Youdoudou/${i + 1}.png`,
+			alt: `Youdoudou Hotel - Vue ${i + 1}`,
+		}));
+	}
+	if (project.value.id === "3") {
+		// SchoolApp
+		return Array.from({ length: 13 }, (_, i) => ({
+			src: `/SchoolApp/${i + 1}.png`,
+			alt: `SchoolApp - Vue ${i + 1}`,
+		}));
+	}
+
+	// Autres projets
+	return Array.from({ length: 4 }, (_, i) => ({
+		src: project.value.image,
+		alt: `${project.value.title} - Image ${i + 1}`,
 	}));
 });
 
