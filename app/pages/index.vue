@@ -507,7 +507,7 @@
 							<div class="space-y-2">
 								<div class="flex items-center justify-between">
 									<span class="font-medium text-gray-700 dark:text-gray-200"
-										>Node.js</span
+										>Python</span
 									>
 									<span
 										class="text-sm text-blue-600 dark:text-blue-400 font-medium"

@@ -737,7 +737,7 @@ const skillCategories = [
 		skills: [
 			{ name: "Laravel", level: 90 },
 			{ name: "Spring Boot", level: 80 },
-			{ name: "PHP", level: 88 },
+			{ name: "Python", level: 88 },
 			{ name: "MySQL", level: 85 },
 			{ name: "PostgreSQL", level: 80 },
 		],

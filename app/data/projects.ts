@@ -51,7 +51,7 @@ export const projects: Project[] = [
 		year: 2024,
 		client: "Youdoudou Hotel",
 		duration: "4 mois",
-		featured: true, // Marqué comme projet phare
+		featured: false, // Marqué comme projet phare
 	},
 	{
 		id: "3",
@@ -105,7 +105,7 @@ export const projects: Project[] = [
 		year: 2025,
 		client: "Direction Générale des Impôts - TCHAD",
 		duration: "5 mois",
-		featured: true, // Marqué comme projet phare
+		featured: false, // Marqué comme projet phare
 	},
 	{
 		id: "6",
@@ -123,7 +123,7 @@ export const projects: Project[] = [
 		year: 2025,
 		client: "MaktabaNa",
 		duration: "en cours",
-		featured: false, // Marqué comme projet phare
+		featured: true, // Marqué comme projet phare
 	},
 ];
 
