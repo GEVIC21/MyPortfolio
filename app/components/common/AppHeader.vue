@@ -303,19 +303,19 @@ const navItems = [
 const socialLinks = [
 	{
 		label: "GitHub",
-		to: "https://github.com/VOTRE_PSEUDO",
+		to: "https://github.com/GEVIC21",
 		icon: "i-simple-icons-github",
 	},
 	{
 		label: "LinkedIn",
-		to: "https://linkedin.com/in/VOTRE_PROFIL",
+		to: "https://www.linkedin.com/in/ndilbe-douvic-toyoum-ba21b6117/",
 		icon: "i-simple-icons-linkedin",
 	},
-	{
-		label: "Twitter / X",
-		to: "https://twitter.com/VOTRE_PSEUDO",
-		icon: "i-simple-icons-x",
-	},
+	// {
+	// 	label: "Twitter / X",
+	// 	to: "https://twitter.com/VOTRE_PSEUDO",
+	// 	icon: "i-simple-icons-x",
+	// },
 ];
 
 onMounted(() => {

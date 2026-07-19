@@ -507,9 +507,9 @@
 								</div>
 								<p class="font-semibold">Email</p>
 								<a
-									href="mailto:contact@example.com"
+									href="mailto:ndilbedouvic@gmail.com"
 									class="text-emerald-100 hover:text-white transition-colors">
-									contact@example.com
+								ndilbedouvic@gmail.com
 								</a>
 							</div>
 							<div class="text-center group">
@@ -542,11 +542,11 @@
 						<div class="flex flex-col sm:flex-row gap-4 justify-center">
 							<UButton
 								to="/contact"
-								variant="solid"
+								variant="outline"
 								color="white"
 								size="lg"
 								icon="i-heroicons-paper-airplane"
-								class="justify-center text-emerald-700 hover:text-emerald-800 transform hover:scale-105 transition-all duration-300">
+								class="justify-center hover:bg-white  hover:text-emerald-700 transform hover:scale-105 transition-all duration-300">
 								Envoyer un message
 							</UButton>
 							<UButton
@@ -940,12 +940,12 @@ const values = [
 const socials = [
 	{
 		name: "GitHub",
-		url: "https://github.com",
+		url: "https://github.com/GEVIC21",
 		icon: "i-simple-icons-github",
 	},
 	{
 		name: "LinkedIn",
-		url: "https://linkedin.com",
+		url: "https://www.linkedin.com/in/ndilbe-douvic-toyoum-ba21b6117/",
 		icon: "i-simple-icons-linkedin",
 	},
 	{

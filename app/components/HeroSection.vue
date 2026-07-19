@@ -1,8 +1,5 @@
 <template>
-	<section
-		ref="heroSection"
-		:style="heroStyles"
-		class="relative flex items-center justify-center w-full">
+	<section ref="heroSection" :style="heroStyles" class="relative flex items-center justify-center w-full">
 		<!--
       Particle container.
       'absolute inset-0' positions it to cover the entire section.
@@ -13,18 +10,14 @@
         tsParticles component.
         Unique ID to avoid conflicts.
       -->
-			<vue-particles
-				id="tsparticles-hero"
-				class="w-full h-full"
-				:options="particleOptions"
+			<vue-particles id="tsparticles-hero" class="w-full h-full" :options="particleOptions"
 				@particles-loaded="particlesLoaded" />
 		</div>
 
 		<!-- Hero content avec photo -->
 		<div class="relative z-10 w-full px-4 sm:px-6 lg:px-8">
 			<div class="max-w-7xl mx-auto">
-				<div
-					class="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16">
+				<div class="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16">
 					<!-- Contenu texte -->
 					<div class="flex-1 text-center lg:text-left">
 						<div ref="titleElement" class="mb-6">
@@ -51,17 +44,13 @@
 							<p
 								class="text-xl md:text-2xl text-emerald-800 dark:text-emerald-300/90 font-medium drop-shadow-[0_1px_8px_rgba(5,150,105,0.4)] dark:drop-shadow-[0_0_8px_rgba(52,211,153,0.7)]">
 								<span ref="typingText"></span>
-								<span
-									ref="typingCursor"
+								<span ref="typingCursor"
 									class="inline-block w-1 h-6 bg-emerald-700 dark:bg-emerald-300/90 ml-1 align-middle"></span>
 							</p>
 						</div>
-						<div
-							ref="buttonElement"
+						<div ref="buttonElement"
 							class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-							<UButton
-								to="#projets"
-								size="xl"
+							<UButton to="#projets" size="xl"
 								class="shadow-lg shadow-emerald-500/25 dark:shadow-emerald-500/25 hover:shadow-emerald-500/40 dark:hover:shadow-emerald-500/40 transition-all duration-300 bg-gradient-to-r from-emerald-600 to-teal-600 dark:from-emerald-600/90 dark:to-teal-600/90 hover:from-emerald-700 hover:to-teal-700 dark:hover:from-emerald-700/90 dark:hover:to-teal-700/90 text-white"
 								trailing-icon="i-heroicons-arrow-right-20-solid">
 								Découvrir mes réalisations
@@ -73,24 +62,26 @@
 					<div ref="profileContainer" class="flex-shrink-0 relative">
 						<!-- Éléments décoratifs autour de la photo -->
 						<div
-							class="absolute inset-0 bg-gradient-to-br from-emerald-400/20 to-teal-600/20 rounded-full blur-3xl scale-110 animate-pulse"></div>
+							class="absolute inset-0 bg-gradient-to-br from-emerald-400/20 to-teal-600/20 rounded-full blur-3xl scale-110 animate-pulse">
+						</div>
 						<div
-							class="absolute -inset-4 bg-gradient-to-tr from-emerald-500/10 via-transparent to-cyan-500/10 rounded-full blur-2xl"></div>
+							class="absolute -inset-4 bg-gradient-to-tr from-emerald-500/10 via-transparent to-cyan-500/10 rounded-full blur-2xl">
+						</div>
 
 						<!-- Conteneur de la photo avec effet glassmorphism -->
 						<div class="relative group">
 							<!-- Forme géométrique décorative -->
 							<div
-								class="absolute -inset-2 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-3xl opacity-75 group-hover:opacity-100 transition-opacity duration-300 transform rotate-3 group-hover:rotate-6 transition-transform duration-500"></div>
+								class="absolute -inset-2 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-3xl opacity-75 group-hover:opacity-100 transition-opacity duration-300 transform rotate-3 group-hover:rotate-6 transition-transform duration-500">
+							</div>
 
 							<!-- Photo avec bordure et effet -->
 							<div
 								class="relative rounded-2xl overflow-hidden shadow-2xl transform transition-all duration-500 group-hover:scale-105 group-hover:-translate-y-2">
 								<div
-									class="absolute inset-0 bg-gradient-to-br from-emerald-500/20 to-teal-600/20 mix-blend-overlay"></div>
-								<img
-									src="/Hero.jpg"
-									class="w-64 h-64 md:w-80 md:h-80 object-cover" />
+									class="absolute inset-0 bg-gradient-to-br from-emerald-500/20 to-teal-600/20 mix-blend-overlay">
+								</div>
+								<img src="/Hero.jpg" class="w-64 h-64 md:w-80 md:h-80 object-cover" />
 
 								<!-- Overlay au hover -->
 								<div
@@ -104,18 +95,17 @@
 
 							<!-- Badges sociaux -->
 							<div class="absolute -bottom-4 -right-4 flex gap-2">
-								<div
+								<!-- GitHub -->
+								<a href="https://github.com/GEVIC21" target="_blank" rel="noopener noreferrer"
 									class="w-12 h-12 bg-white dark:bg-gray-800 rounded-full shadow-lg flex items-center justify-center transform transition-transform duration-300 hover:scale-110 cursor-pointer">
-									<Icon
-										name="i-simple-icons-github"
-										class="w-6 h-6 text-gray-800 dark:text-white" />
-								</div>
-								<div
+									<Icon name="i-simple-icons-github" class="w-6 h-6 text-gray-800 dark:text-white" />
+								</a>
+
+								<!-- LinkedIn -->
+								<a href="https://www.linkedin.com/in/ndilbe-douvic-toyoum-ba21b6117/" target="_blank" rel="noopener noreferrer"
 									class="w-12 h-12 bg-white dark:bg-gray-800 rounded-full shadow-lg flex items-center justify-center transform transition-transform duration-300 hover:scale-110 cursor-pointer">
-									<Icon
-										name="i-simple-icons-linkedin"
-										class="w-6 h-6 text-blue-600" />
-								</div>
+									<Icon name="i-simple-icons-linkedin" class="w-6 h-6 text-blue-600" />
+								</a>
 							</div>
 						</div>
 					</div>
@@ -124,17 +114,12 @@
 		</div>
 
 		<!-- Scroll indicator -->
-		<div
-			ref="scrollIndicator"
-			class="absolute bottom-8 left-1/2 transform -translate-x-1/2">
+		<div ref="scrollIndicator" class="absolute bottom-8 left-1/2 transform -translate-x-1/2">
 			<div class="relative">
 				<div
-					class="absolute inset-0 bg-emerald-500/90 dark:bg-emerald-500/90 rounded-full blur-xl opacity-30 dark:opacity-50 animate-pulse"></div>
-				<UButton
-					to="#projets"
-					icon="i-heroicons-chevron-down"
-					variant="ghost"
-					size="lg"
+					class="absolute inset-0 bg-emerald-500/90 dark:bg-emerald-500/90 rounded-full blur-xl opacity-30 dark:opacity-50 animate-pulse">
+				</div>
+				<UButton to="#projets" icon="i-heroicons-chevron-down" variant="ghost" size="lg"
 					class="relative text-emerald-700 dark:text-emerald-200/90 animate-bounce" />
 			</div>
 		</div>
@@ -492,10 +477,12 @@ onUnmounted(() => {
 <style scoped>
 /* Animation pour les éléments décoratifs */
 @keyframes float {
+
 	0%,
 	100% {
 		transform: translateY(0px);
 	}
+
 	50% {
 		transform: translateY(-10px);
 	}

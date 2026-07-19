@@ -210,21 +210,21 @@ const showConfirmation = ref(false);
 
 // Réseaux sociaux
 const socials = [
-    { 
-        name: "GitHub", 
-        url: "https://github.com", 
-        icon: "i-simple-icons-github" 
-    },
-    { 
-        name: "LinkedIn", 
-        url: "https://linkedin.com", 
-        icon: "i-simple-icons-linkedin" 
-    },
-    { 
-        name: "WhatsApp", 
-        url: "https://wa.me/23567389181", 
-        icon: "i-simple-icons-whatsapp" 
-    },
+	{
+		name: "GitHub",
+		url: "https://github.com/GEVIC21",
+		icon: "i-simple-icons-github",
+	},
+	{
+		name: "LinkedIn",
+		url: "https://www.linkedin.com/in/ndilbe-douvic-toyoum-ba21b6117/",
+		icon: "i-simple-icons-linkedin",
+	},
+	{
+		name: "WhatsApp",
+		url: "https://wa.me/23567389181",
+		icon: "i-simple-icons-whatsapp",
+	},
 ];
 
 const onSubmit = async () => {
